@@ -1,0 +1,34 @@
+{
+    "uomIdTo": "record3",
+    "fromDate": "2020-04-01T16:13:48.000+0000",
+    "conversationFactories": "conversationFactories",
+    "customeMethodId": "s-567",
+    "decimalScale": 200,
+    "roundingMode": "update",
+    "dmucd": [
+        {
+            "description": "updated"
+        },
+        {
+            "description": "updated"
+        }
+    ],
+    "dctu": [
+        {
+            "abbrevation": "date3"
+        }
+    ]
+}
+
+-------------------------------------------------
+/common/addAllRecord
+/common/getAll
+/common/getRecords/{id}
+/common/deleteby/{id}
+/common//update/{id}
+
+
+----------------
+Swagger Api
+----
+localhost:8081/swagger-ui.html
