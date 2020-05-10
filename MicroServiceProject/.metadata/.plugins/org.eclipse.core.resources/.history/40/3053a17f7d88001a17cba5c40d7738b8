@@ -1,0 +1,83 @@
+package com.example.catalog.controller;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.example.catalog.entity.CatalogIteams;
+import com.example.catalog.entity.Movies;
+import com.example.catalog.entity.Rating;
+import com.example.catalog.entity.userRating;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+
+@RestController
+@RequestMapping("/catalogs")
+public class MovieCatalogController {
+	//instance object
+	@Autowired
+	private RestTemplate restTemplate;
+	@Autowired
+	private WebClient.Builder webclientBuilder;
+	
+	@RequestMapping("/{userId}")
+	@HystrixCommand(fallbackMethod="getFallbackCatalogs")
+	public List<CatalogIteams> getCatalogs(@PathVariable("userId") String userId){
+		
+	/*	// it will create everytime object
+	 RestTemplate restTemplate = new RestTemplate();
+		System.out.println(restTemplate.hashCode());*/
+		
+		
+		//get all rated movies Ids
+		userRating userRatings=restTemplate.getForObject("http://rating-data-service/ratingdata/user/"+userId, userRating.class);
+		
+		return	userRatings.getUserRating().stream().map(rating->{
+		Movies movie=restTemplate.getForObject("http://movie-info-service/movies/"+rating.getMovieId(), Movies.class);
+			/*
+			Movies movie = webclientBuilder.build()
+			.get()
+			.uri("http://localhost:8020/movies/"+rating.getMovieId())
+			.retrieve()
+			.bodyToMono(Movies.class)
+			.block();*/
+			return new CatalogIteams(movie.getName(),movie.getDescription(),rating.getRating());
+					}).collect(Collectors.toList());
+		
+		
+		//return Collections.singletonList(new CatalogIteams("babubali","this movie is hollywood","5 *"));
+		
+	}
+	
+	public List<CatalogIteams> getFallbackCatalogs(@PathVariable("userId") String userId){
+		return Arrays.asList(new CatalogIteams("no movie","",0) );
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

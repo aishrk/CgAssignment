@@ -1,0 +1,3 @@
+1587883284414	Rename package 'com.example.demo'
+1587988323037	Extract method 'getUserRating'
+1587988603025	Extract method 'getCatalogitems'

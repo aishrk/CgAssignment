@@ -1,0 +1,33 @@
+package com.example.rating.entity;
+
+import java.util.List;
+
+public class userRating {
+
+	
+	private List<Rating> userRating;
+
+	public userRating(List<Rating> userRating) {
+		super();
+		this.userRating = userRating;
+	}
+
+	public userRating() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public List<Rating> getUserRating() {
+		return userRating;
+	}
+
+	public void setUserRating(List<Rating> userRating) {
+		this.userRating = userRating;
+	}
+
+	@Override
+	public String toString() {
+		return "userRating [userRating=" + userRating + "]";
+	}
+	
+}

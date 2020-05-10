@@ -1,0 +1,46 @@
+package com.example.info.entity;
+
+public class Movies {
+
+	private String movieId;
+    private String name;
+    private String description;
+    
+    
+
+    public Movies(String movieId, String name, String description) {
+        this.movieId = movieId;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Movies() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+	
+}

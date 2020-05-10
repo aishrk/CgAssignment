@@ -1,0 +1,5 @@
+spring.application.name=movie-info-service
+api.key=cea3b7a0b210db1ea9f3707365849dd8
+server.port=8020
+
+
